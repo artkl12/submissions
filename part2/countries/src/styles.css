@@ -1,0 +1,35 @@
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #c4c3ca;
+  background-color: #1f2029;
+  overflow-x: hidden;
+}
+
+input {
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 5px;
+}
+
+button {
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 5px;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(123, 157, 250, 0.5),
+    rgba(227, 104, 252, 0.5)
+  );
+}
+
+button:focus {
+  background-color: rgba(39, 6, 46, 0.8);
+  color: #c4c3ca;
+}
