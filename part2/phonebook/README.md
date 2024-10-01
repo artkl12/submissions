@@ -12,3 +12,5 @@ npm install json-server --save-dev
   },
 }
 npm run server
+
+![Capture1](https://github.com/user-attachments/assets/826e920c-506f-428d-93c5-46700d1d08b0)
