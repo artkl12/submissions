@@ -2,7 +2,6 @@ import Note from "./components/Note";
 import Notification from "./components/Notification";
 import { useState, useEffect } from "react";
 import noteService from "./services/notes";
-import axios from "axios";
 import Footer from "./components/Footer";
 
 function App() {
@@ -87,7 +86,7 @@ function App() {
   };
 
   return (
-    <>
+    <div id="root">
       <h1>Notes</h1>
       <Notification
         errorMessage={errorMessage}
@@ -114,7 +113,7 @@ function App() {
         <button type="submit">save</button>
       </form>
       <Footer />
-    </>
+    </div>
   );
 }
 
