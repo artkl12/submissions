@@ -28,3 +28,11 @@ h1 {
   padding: 10px;
   margin-bottom: 10px;
 }
+
+input {
+  margin-right: 10px;
+}
+
+input:focus {
+  outline: none;
+}
