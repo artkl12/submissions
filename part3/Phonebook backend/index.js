@@ -1,7 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
-const cors = require('cors')
+const cors = require("cors");
+
+require('dotenv').config()
 
 let persons = [
   {
@@ -33,14 +35,16 @@ morgan.token("body", function (request, response) {
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms :body")
 );
-app.use(cors())
+app.use(cors());
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
 });
 
 app.get("/api/persons", (request, response) => {
-  response.json(persons);
+  Person.find({}).then((persons) => {
+    response.json(persons);
+  });
 });
 
 app.get("/info", (request, response) => {
@@ -112,10 +116,40 @@ app.post("/api/persons", (request, response) => {
 });
 
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({error: 'unknown endpoint'})
-}
+  response.status(404).send({ error: "unknown endpoint" });
+};
 
-app.use(unknownEndpoint)
+app.use(unknownEndpoint);
+
+const mongoose = require('mongoose')
+
+mongoose.set('strictQuery', false)
+// const password = process.argv[2]
+
+
+const url = process.env.MONGODB_URI;
+console.log('connecting to ', url)
+mongoose.connect(url).then(result => {
+  console.log('connected to MONGODB')
+})
+.catch((error) => {
+  console.log('error connecting to MongoDB:', error.message)
+})
+
+const personSchema = new mongoose.Schema({
+  name: String,
+  number: String,
+});
+
+const Person = mongoose.model("Person", personSchema);
+
+personSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
 
 const PORT = process.env.PORT || 3002;
 app.listen(PORT);
