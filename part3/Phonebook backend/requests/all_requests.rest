@@ -2,9 +2,8 @@ POST http://localhost:3002/api/persons
 Content-Type: application/json
 
 {  
-  "id": "",
-  "name": "Ada Lovelac",
-  "number": "987-654"
+  "name": "abcc",
+  "number": "989"
 }
 
 ###
@@ -14,7 +13,16 @@ GET http://localhost:3002/api/persons
 GET http://localhost:3002/info
 
 ###
-GET http://localhost:3002/api/persons/3
+GET http://localhost:3002/api/persons/671299663f374ee8d0b91ce0
 
 ###
-DELETE http://localhost:3002/api/persons/2
+DELETE http://localhost:3002/api/persons/6717449c3f8f5f20dfb8244f
+
+###
+PUT http://localhost:3002/api/persons/671773f55383a286b94123be
+Content-Type: application/json
+
+{  
+  "name": "abb",
+  "number": "255"
+}
