@@ -1,6 +1,6 @@
 .error {
   color: red;
-  background: lightgrey;
+  background: rgba(0, 0, 0, 0.1);
   font-size: 20px;
   border-style: solid;
   border-radius: 5px;
@@ -10,7 +10,7 @@
 
 .success {
   color: green;
-  background: lightgrey;
+  background: rgba(0, 0, 0, 0.1);
   font-size: 20px;
   border-style: solid;
   border-radius: 5px;
@@ -19,7 +19,7 @@
 }
 
 body {
-  background-image: linear-gradient( rgb(253, 235, 133), rgb(255, 255, 255));
-  background-repeat: no-repeat;
-  background-size: contain;
+  background: linear-gradient( to right, #ffebb4, #ffffff);
+  background-position: center top;
+  background-size: cover;
 }

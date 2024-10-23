@@ -59,23 +59,16 @@ function App() {
             setSuccessMessage(`${updatedPerson.name}\`s number was updated`);
             setTimeout(() => {
               setSuccessMessage(null);
-            }, 5000);
+            }, 3000);
             setNewName("");
             setNewNumber("");
           })
           .catch((error) => {
-            console.error(
-              "There was an error updating the person's number!",
-              error
-            );
-            setErrorMessage(
-              `${updatedPerson.name} was already removed from server`
-            );
+            console.error("updating number error", error);
+            setErrorMessage(error.request.response);
             setTimeout(() => {
               setErrorMessage(null);
-            }, 5000);
-            setNewName("");
-            setNewNumber("");
+            }, 3000);
             personsService.getAll().then((initialPersons) => {
               setPersons(initialPersons);
             });
@@ -87,16 +80,25 @@ function App() {
         number: newNumber,
       };
 
-      personsService.create(personObject).then((returnedPerson) => {
-        setPersons(persons.concat(returnedPerson));
-        setSuccessMessage(`${returnedPerson.name} was successfully added`);
-        setTimeout(() => {
-          setSuccessMessage(null);
-        }, 5000);
+      personsService
+        .create(personObject)
+        .then((returnedPerson) => {
+          setPersons(persons.concat(returnedPerson));
+          setSuccessMessage(`${returnedPerson.name} was successfully added`);
+          setTimeout(() => {
+            setSuccessMessage(null);
+          }, 3000);
 
-        setNewName("");
-        setNewNumber("");
-      });
+          setNewName("");
+          setNewNumber("");
+        })
+        .catch((error) => {
+          console.log("create new person error", error);
+          setErrorMessage(error.request.response);
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 3000);
+        });
     }
   };
 
@@ -109,14 +111,14 @@ function App() {
           setSuccessMessage(`${name} was successfully deleted`);
           setTimeout(() => {
             setSuccessMessage(null);
-          }, 5000);
+          }, 3000);
         })
         .catch((error) => {
           console.error("There was an error deleting the person!", error);
-          setErrorMessage(`${name} was already removed from server`);
+          setErrorMessage(error.request.response);
           setTimeout(() => {
             setErrorMessage(null);
-          }, 5000);
+          }, 3000);
           personsService.getAll().then((initialPersons) => {
             setPersons(initialPersons);
           });
