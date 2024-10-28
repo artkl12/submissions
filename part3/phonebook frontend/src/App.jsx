@@ -12,18 +12,17 @@ function App() {
   const [searchVal, setSearchVal] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [disableButtons, setDisableButtons] = useState(false);
 
   useEffect(() => {
-    console.log("render", persons.length, "persons");
     personsService.getAll().then((initialPersons) => {
       setPersons(initialPersons);
     });
   }, []);
-
-  console.log("render", persons.length, "persons");
-
+  
   const addPerson = (e) => {
     e.preventDefault();
+    setDisableButtons(true)
 
     if (!newName || !newNumber) {
       alert("Fill the name and number fields");
@@ -59,6 +58,7 @@ function App() {
             setSuccessMessage(`${updatedPerson.name}\`s number was updated`);
             setTimeout(() => {
               setSuccessMessage(null);
+              setDisableButtons(false)
             }, 3000);
             setNewName("");
             setNewNumber("");
@@ -68,6 +68,7 @@ function App() {
             setErrorMessage(error.request.response);
             setTimeout(() => {
               setErrorMessage(null);
+              setDisableButtons(false)
             }, 3000);
             personsService.getAll().then((initialPersons) => {
               setPersons(initialPersons);
@@ -87,22 +88,23 @@ function App() {
           setSuccessMessage(`${returnedPerson.name} was successfully added`);
           setTimeout(() => {
             setSuccessMessage(null);
+            setDisableButtons(false)
           }, 3000);
-
           setNewName("");
           setNewNumber("");
         })
         .catch((error) => {
-          console.log("create new person error", error);
           setErrorMessage(error.request.response);
           setTimeout(() => {
             setErrorMessage(null);
+            setDisableButtons(false)
           }, 3000);
         });
     }
   };
 
   const handleDelete = (id, name) => {
+    setDisableButtons(true)
     if (window.confirm(`Are you sure you want to delete ${name}?`)) {
       personsService
         .remove(id)
@@ -111,6 +113,7 @@ function App() {
           setSuccessMessage(`${name} was successfully deleted`);
           setTimeout(() => {
             setSuccessMessage(null);
+            setDisableButtons(false)
           }, 3000);
         })
         .catch((error) => {
@@ -118,6 +121,7 @@ function App() {
           setErrorMessage(error.request.response);
           setTimeout(() => {
             setErrorMessage(null);
+            setDisableButtons(false)
           }, 3000);
           personsService.getAll().then((initialPersons) => {
             setPersons(initialPersons);
@@ -158,6 +162,7 @@ function App() {
         persons={persons}
         searchVal={searchVal}
         handleDelete={handleDelete}
+        disableButtons={disableButtons}
       />
     </>
   );

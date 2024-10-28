@@ -1,7 +1,7 @@
 import React from "react";
 import Person from "./Person";
 
-const Persons = ({ persons, searchVal, handleDelete }) => {
+const Persons = ({ persons, searchVal, handleDelete, disableButtons }) => {
   return (
     <div>
       {persons
@@ -13,6 +13,7 @@ const Persons = ({ persons, searchVal, handleDelete }) => {
             key={filteredPerson.name}
             person={filteredPerson}
             handleDelete={handleDelete}
+            disableButtons={disableButtons}
           />
         ))}
     </div>
