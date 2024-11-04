@@ -6,7 +6,7 @@ import SelectedCountry from "./components/SelectedCountry";
 const App = () => {
   const [query, setQuery] = useState("");
   const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState(false);
 
   useEffect(() => {
     axios
@@ -25,23 +25,21 @@ const App = () => {
 
   const handleShow = (country) => {
     setSelectedCountry(country);
-    console.log("clicked", country);
+    console.log(country.capital);
   };
 
   return (
     <>
-      find country:{" "}
-      <input
-        type="text"
-        value={query}
-        onChange={handleSearch}
-      />
+      find country: <input type="text" value={query} onChange={handleSearch} />
       <Filter
         query={query}
         filteredCountries={filteredCountries}
         handleShow={handleShow}
+        selectedCountry={selectedCountry}
       />
-      <SelectedCountry selectedCountry={selectedCountry} />
+      <SelectedCountry
+        selectedCountry={selectedCountry}
+      />
     </>
   );
 };

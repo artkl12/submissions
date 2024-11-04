@@ -1,6 +1,8 @@
+import SelectedCountry from "./SelectedCountry";
+
 const Filter = ({ query, filteredCountries, handleShow }) => {
   return (
-    <div>
+    <>
       {query && filteredCountries.length > 10 && (
         <p>Too many matches, please refine your search.</p>
       )}
@@ -19,24 +21,11 @@ const Filter = ({ query, filteredCountries, handleShow }) => {
             ))}
           </ul>
         )}
+
       {query && filteredCountries.length === 1 && (
-        <div>
-          <h2>{filteredCountries[0].name.common}</h2>
-          <p>Capital: {filteredCountries[0].capital}</p>
-          <p>Area: {filteredCountries[0].area} km²</p>
-          <p>Languages:</p>
-          <ul>
-            {Object.values(filteredCountries[0].languages).map((language) => (
-              <li key={language}>{language}</li>
-            ))}
-          </ul>
-          <img
-            src={filteredCountries[0].flags.png}
-            alt={`Flag of ${filteredCountries[0].name.common}`}
-          />
-        </div>
+        <SelectedCountry selectedCountry={filteredCountries[0]} />
       )}
-    </div>
+    </>
   );
 };
 

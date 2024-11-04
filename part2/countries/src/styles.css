@@ -33,3 +33,7 @@ button:focus {
   background-color: rgba(39, 6, 46, 0.8);
   color: #c4c3ca;
 }
+
+#icon {
+  height: 50px;
+}
